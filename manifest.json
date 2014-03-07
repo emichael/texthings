@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "TeX All the Things",
+  "description": "An extension which lets you enable LaTeX on any website",
+  "version": "0.1",
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["texify.js"]
+    }
+  ]
+}
