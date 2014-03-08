@@ -27,7 +27,7 @@ function should_texify(host) {
 
 function host_matches(host, domain_list) {
   for (var i = 0; i < domain_list.length; i++) {
-    if (host.contains(domain_list[i])) {
+    if (host.indexOf(domain_list[i]) >= 0) {
       return true;
     }
   }

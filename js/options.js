@@ -1,16 +1,14 @@
-var allowed_options = ['enabled', 'white_list_mode', 'sites'];
+var default_options = {
+  enabled: true,
+  white_list_mode: false,
+  sites: []
+};
 
 function get_option(option_name) {
-  if (!('enabled' in localStorage)) {
-    localStorage['enabled'] = JSON.stringify(true);
-  }
-
-  if (!('sites' in localStorage)) {
-    localStorage['sites'] = JSON.stringify([]);
-  }
-
-  if (!('white_list_mode' in localStorage)) {
-    localStorage['white_list_mode'] = JSON.stringify(false);
+  for (var option in default_options) {
+    if (!(option in localStorage)) {
+      localStorage[option] = JSON.stringify(default_options[option]);
+    }
   }
 
   if (option_allowed(option_name)) {
@@ -29,5 +27,5 @@ function set_option(option_name, value) {
 }
 
 function option_allowed(option_name) {
-  return (allowed_options.indexOf(option_name) >= 0);
+  return (option_name in default_options);
 }
