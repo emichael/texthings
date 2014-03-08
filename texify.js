@@ -15,6 +15,10 @@ function reTeX() { \
 }; \
 setInterval(reTeX, 3000);";
 
-document.head.appendChild(config);
-document.head.appendChild(js);
-document.body.appendChild(repeater);
+chrome.runtime.sendMessage({method: "getStatus"}, function(response) {
+  if (response.status === "enabled") {
+    document.head.appendChild(config);
+    document.head.appendChild(js);
+    document.body.appendChild(repeater);
+  }
+});
