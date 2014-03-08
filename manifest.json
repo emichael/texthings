@@ -18,9 +18,13 @@
   ],
 
   "background": {
-    "scripts": ["js/background.js"],
+    "scripts": ["js/background.js", "js/options.js"],
     "persistent": true
   },
+
+  "permissions": [
+    "tabs"
+  ],
 
   "options_page": "options.html"
 }

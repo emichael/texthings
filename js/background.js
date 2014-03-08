@@ -1,22 +1,43 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
-  disabled = localStorage["status"] && (localStorage["status"] === "disabled");
-  if (disabled) {
-    chrome.browserAction.setIcon({path: "img/icon.png"});
-    localStorage["status"] = "enabled";
+  init_unset_options();
+
+  var enabled = JSON.parse(localStorage['enabled']);
+  if (enabled) {
+    chrome.browserAction.setIcon({path: 'img/icon-disabled.png'});
+    localStorage['enabled'] = JSON.stringify(false);
   } else {
-    chrome.browserAction.setIcon({path: "img/icon-disabled.png"});
-    localStorage["status"] = "disabled";
+    chrome.browserAction.setIcon({path: 'img/icon.png'});
+    localStorage['enabled'] = JSON.stringify(true);
   }
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.method == "getStatus") {
-    if (localStorage["status"]) {
-      sendResponse({status: localStorage["status"]});
-    } else {
-      sendResponse({status: "enabled"});
-    }
+  init_unset_options();
+
+  if (request.method == 'shouldTeXify') {
+    sendResponse({answer: should_texify(request.host)});
   } else {
     sendResponse({});
   }
 });
+
+function should_texify(host) {
+  if (!(JSON.parse(localStorage['enabled']))) {
+    return false;
+  }
+
+  var white_list_mode = JSON.parse(localStorage['white_list_mode']);
+  var domain_list = JSON.parse(localStorage['sites']);
+  var matches = host_matches(host, domain_list);
+
+  return (white_list_mode == matches);
+}
+
+function host_matches(host, domain_list) {
+  for (var i = 0; i < domain_list.length; i++) {
+    if (host.contains(domain_list[i])) {
+      return true;
+    }
+  }
+  return false;
+}

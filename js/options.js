@@ -1,31 +1,78 @@
-// Saves options to localStorage.
 function save_options() {
-  var select = document.getElementById("color");
-  var color = select.children[select.selectedIndex].value;
-  localStorage["favorite_color"] = color;
+  // Save the site list into localStorage
+  var sites = [];
+  $('#selSite>option').each(function() {
+    sites.push($(this).val());
+  });
+  localStorage['sites'] = JSON.stringify(sites);
+
+  // White List Mode
+  localStorage['white_list_mode'] = JSON.stringify(
+    $('#chkWhiteListMode').is(':checked'));
 
   // Update status to let user know options were saved.
-  var status = document.getElementById("status");
-  status.innerHTML = "Options Saved.";
+  var status = document.getElementById('status');
+  status.innerHTML = 'Options Saved.';
   setTimeout(function() {
-    status.innerHTML = "";
+    status.innerHTML = '';
   }, 750);
 }
 
-// Restores select box state to saved value from localStorage.
 function restore_options() {
-  var favorite = localStorage["favorite_color"];
-  if (!favorite) {
-    return;
-  }
-  var select = document.getElementById("color");
-  for (var i = 0; i < select.children.length; i++) {
-    var child = select.children[i];
-    if (child.value == favorite) {
-      child.selected = "true";
-      break;
-    }
+  init_unset_options();
+
+  // Load the site list
+  var sites = JSON.parse(localStorage['sites']);
+  $.each(sites, function(index, site) {
+    $('#selSite').append($('<option>', {
+        value: site,
+        text : site
+    }));
+  });
+
+  // White List Mode
+  if (JSON.parse(localStorage['white_list_mode'])) {
+    $('#chkWhiteListMode').prop('checked', true);
   }
 }
-document.addEventListener('DOMContentLoaded', restore_options);
-document.querySelector('#save').addEventListener('click', save_options);
+
+function init_unset_options() {
+  if (!('enabled' in localStorage)) {
+    localStorage['enabled'] = JSON.stringify(true);
+  }
+
+  if (!('sites' in localStorage)) {
+    localStorage['sites'] = JSON.stringify([]);
+  }
+
+  if (!('white_list_mode' in localStorage)) {
+    localStorage['white_list_mode'] = JSON.stringify(false);
+  }
+}
+
+function add_site() {
+  var site = $('#txtAddSite').val();
+  $('#txtAddSite').val('');
+
+  $('#selSite').append($('<option>', {
+      value: site,
+      text : site
+  }));
+}
+
+function remove_site() {
+  $('#selSite>option:selected').remove();
+}
+
+function clear_sites() {
+  $('#selSite>option').remove();
+}
+
+$(function() {
+  $('#btnAddSite').click(add_site);
+  $('#btnRemoveSite').click(remove_site);
+  $('#btnClearSite').click(clear_sites);
+  $('#save').click(save_options);
+
+  restore_options();
+});
