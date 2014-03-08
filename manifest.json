@@ -13,7 +13,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["js/texify.js"]
+      "js": ["js/texify.js"],
+      "run_at": "document_end"
     }
   ],
 
@@ -21,6 +22,8 @@
     "scripts": ["js/background.js", "js/options.js"],
     "persistent": true
   },
+
+  "web_accessible_resources" : ["js/retexChecker.js"],
 
   "permissions": [
     "tabs"
