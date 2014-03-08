@@ -1,10 +1,10 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
   disabled = localStorage["status"] && (localStorage["status"] === "disabled");
   if (disabled) {
-    chrome.browserAction.setIcon({path: "icon.png"});
+    chrome.browserAction.setIcon({path: "img/icon.png"});
     localStorage["status"] = "enabled";
   } else {
-    chrome.browserAction.setIcon({path: "icon-disabled.png"});
+    chrome.browserAction.setIcon({path: "img/icon-disabled.png"});
     localStorage["status"] = "disabled";
   }
 });
