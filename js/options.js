@@ -1,42 +1,6 @@
-function save_options() {
-  // Save the site list into localStorage
-  var sites = [];
-  $('#selSite>option').each(function() {
-    sites.push($(this).val());
-  });
-  localStorage['sites'] = JSON.stringify(sites);
+var allowed_options = ['enabled', 'white_list_mode', 'sites'];
 
-  // White List Mode
-  localStorage['white_list_mode'] = JSON.stringify(
-    $('#chkWhiteListMode').is(':checked'));
-
-  // Update status to let user know options were saved.
-  var status = document.getElementById('status');
-  status.innerHTML = 'Options Saved.';
-  setTimeout(function() {
-    status.innerHTML = '';
-  }, 750);
-}
-
-function restore_options() {
-  init_unset_options();
-
-  // Load the site list
-  var sites = JSON.parse(localStorage['sites']);
-  $.each(sites, function(index, site) {
-    $('#selSite').append($('<option>', {
-        value: site,
-        text : site
-    }));
-  });
-
-  // White List Mode
-  if (JSON.parse(localStorage['white_list_mode'])) {
-    $('#chkWhiteListMode').prop('checked', true);
-  }
-}
-
-function init_unset_options() {
+function get_option(option_name) {
   if (!('enabled' in localStorage)) {
     localStorage['enabled'] = JSON.stringify(true);
   }
@@ -48,31 +12,22 @@ function init_unset_options() {
   if (!('white_list_mode' in localStorage)) {
     localStorage['white_list_mode'] = JSON.stringify(false);
   }
+
+  if (option_allowed(option_name)) {
+    return JSON.parse(localStorage[option_name]);
+  } else {
+    throw "Option " + option_name + " not supported";
+  }
 }
 
-function add_site() {
-  var site = $('#txtAddSite').val();
-  $('#txtAddSite').val('');
-
-  $('#selSite').append($('<option>', {
-      value: site,
-      text : site
-  }));
+function set_option(option_name, value) {
+  if (option_allowed(option_name)) {
+    localStorage[option_name] = JSON.stringify(value);
+  } else {
+    throw "Option " + option_name + " not supported";
+  }
 }
 
-function remove_site() {
-  $('#selSite>option:selected').remove();
+function option_allowed(option_name) {
+  return (allowed_options.indexOf(option_name) >= 0);
 }
-
-function clear_sites() {
-  $('#selSite>option').remove();
-}
-
-$(function() {
-  $('#btnAddSite').click(add_site);
-  $('#btnRemoveSite').click(remove_site);
-  $('#btnClearSite').click(clear_sites);
-  $('#save').click(save_options);
-
-  restore_options();
-});
