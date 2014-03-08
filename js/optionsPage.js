@@ -9,12 +9,7 @@ function save_options() {
   // White List Mode
   set_option('white_list_mode', $('#chkWhiteListMode').is(':checked'));
 
-  // Update status to let user know options were saved.
-  var status = document.getElementById('status');
-  status.innerHTML = 'Options Saved.';
-  setTimeout(function() {
-    status.innerHTML = '';
-  }, 750);
+  displayMessage('Options saved.');
 }
 
 function restore_options() {
@@ -49,6 +44,13 @@ function remove_site() {
 
 function clear_sites() {
   $('#selSite>option').remove();
+}
+
+function displayMessage(message) {
+  $('#status').text(message).addClass('visible');
+  setTimeout(function() {
+    $('#status').removeClass('visible');
+  }, 1250);
 }
 
 $(function() {

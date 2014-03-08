@@ -2,12 +2,17 @@
 <head>
   <title>TeX All the Things Options</title>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/options.js"></script>
-  <script src="js/optionsPage.js"></script>
+  <link rel="stylesheet" href="css/options.css">
 </head>
 
 <body>
+  <h1>Options</h1>
+  <div id="status"></div>
+
+  <h2>Site Filter</h2>
+  <p class="optionInfo">
+    Add domains and subdomains to the list below (e.g. facebook.com, code.google.com).
+  </p>
   <table id="sitesList">
     <tbody>
       <tr>
@@ -24,10 +29,17 @@
     </tbody>
   </table>
 
-  <h2><input type="checkbox" id="chkWhiteListMode">White List Mode</h2>
+  <h3><input type="checkbox" id="chkWhiteListMode">White List Mode</h3>
+  <p class="optionInfo">
+    If White List Mode is enabled, only those domains in the list will be typeset.
+    Otherwise, only domains in the list will <em>not</em> be typeset.
+  </p>
 
-  <div id="status"></div>
   <button id="save">Save</button>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/options.js"></script>
+  <script src="js/optionsPage.js"></script>
 </body>
 
 
