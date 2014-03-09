@@ -2,8 +2,15 @@
   "manifest_version": 2,
 
   "name": "TeX All the Things",
+  "short_name": "TeX Things",
+  "author": "emichael",
   "description": "An extension which lets you enable LaTeX on any website",
   "version": "0.2",
+
+  "icons": {
+    "128": "img/icon128.png",
+    "48": "img/icon48.png"
+  },
 
   "browser_action": {
     "default_icon": {
@@ -11,11 +18,6 @@
       "19": "img/browser19.png"
     },
     "default_title": "TeX All the Things"
-  },
-
-  "icons": {
-    "128": "img/icon128.png",
-    "48": "img/icon48.png"
   },
 
   "content_scripts": [
