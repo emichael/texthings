@@ -1,9 +1,19 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
   if (get_option('enabled')) {
-    chrome.browserAction.setIcon({path: 'img/icon-disabled.png'});
+    chrome.browserAction.setIcon({
+      path: {
+      "38": "img/browser-disabled38.png",
+      "19": "img/browser-disabled19.png"
+      }
+    });
     set_option('enabled', false);
   } else {
-    chrome.browserAction.setIcon({path: 'img/icon.png'});
+    chrome.browserAction.setIcon({
+      path: {
+      "38": "img/browser38.png",
+      "19": "img/browser19.png"
+      }
+    });
     set_option('enabled', true);
   }
 });

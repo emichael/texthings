@@ -6,8 +6,16 @@
   "version": "0.1",
 
   "browser_action": {
-    "default_icon": "img/icon.png",
+    "default_icon": {
+      "38": "img/browser38.png",
+      "19": "img/browser19.png"
+    },
     "default_title": "TeX All the Things"
+  },
+
+  "icons": {
+    "128": "img/icon128.png",
+    "48": "img/icon48.png"
   },
 
   "content_scripts": [
