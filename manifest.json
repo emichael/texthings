@@ -33,9 +33,5 @@
 
   "web_accessible_resources" : ["js/retexChecker.js"],
 
-  "permissions": [
-    "tabs"
-  ],
-
   "options_page": "options.html"
 }
