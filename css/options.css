@@ -44,3 +44,8 @@ td {
   -webkit-transition: opacity 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out
 }
+
+.inlineSuboption {
+  display: inline-block;
+  margin: 0 15px;
+}

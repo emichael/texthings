@@ -1,4 +1,10 @@
 function save_options() {
+  // Math Delimiters
+  set_option('inline_dollar', $('#chkInlineDollar').is(':checked'));
+  set_option('inline_bracket', $('#chkInlineBracket').is(':checked'));
+  set_option('display_dollar', $('#chkDisplayDollar').is(':checked'));
+  set_option('display_bracket', $('#chkDisplayBracket').is(':checked'));
+
   // Save the site list
   var sites = [];
   $('#selSite>option').each(function() {
@@ -13,6 +19,20 @@ function save_options() {
 }
 
 function restore_options() {
+  // Math Delimiters
+  if (get_option('inline_dollar')) {
+    $('#chkInlineDollar').prop('checked', true);
+  }
+  if (get_option('inline_bracket')) {
+    $('#chkInlineBracket').prop('checked', true);
+  }
+  if (get_option('display_dollar')) {
+    $('#chkDisplayDollar').prop('checked', true);
+  }
+  if (get_option('display_bracket')) {
+    $('#chkDisplayBracket').prop('checked', true);
+  }
+
   // Load the site list
   var sites = get_option('sites');
   $.each(sites, function(index, site) {

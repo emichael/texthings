@@ -1,7 +1,11 @@
 var default_options = {
   enabled: true,
   white_list_mode: false,
-  sites: []
+  sites: [],
+  inline_dollar: true,
+  inline_bracket: true,
+  display_dollar: true,
+  display_bracket: true
 };
 
 function get_option(option_name) {

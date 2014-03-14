@@ -20,7 +20,8 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.method == 'shouldTeXify') {
-    sendResponse({answer: should_texify(request.host)});
+    sendResponse({answer: should_texify(request.host),
+                  delimiters: get_delimiters()});
   } else {
     sendResponse({});
   }
@@ -42,4 +43,13 @@ function host_matches(host, domain_list) {
     }
   }
   return false;
+}
+
+function get_delimiters() {
+  var delimiters = {};
+  delimiters.inline_dollar = get_option('inline_dollar');
+  delimiters.inline_bracket = get_option('inline_bracket');
+  delimiters.display_dollar = get_option('display_dollar');
+  delimiters.display_bracket = get_option('display_bracket');
+  return delimiters;
 }
