@@ -23,6 +23,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "all_frames": true,
       "js": ["js/texify.js"],
       "run_at": "document_end"
     }
