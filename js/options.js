@@ -5,7 +5,8 @@ var default_options = {
   inline_dollar: true,
   inline_bracket: true,
   display_dollar: true,
-  display_bracket: true
+  display_bracket: true,
+  allow_eval_inline: false
 };
 
 function get_option(option_name) {

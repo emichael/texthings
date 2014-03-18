@@ -32,6 +32,10 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
           var terms = policies[j].trim().split(' ');
           if (terms[0].toLowerCase() == 'script-src') {
             terms.push('https://c328740.ssl.cf1.rackcdn.com');
+            if (get_option('allow_eval_inline')) {
+              terms.push("'unsafe-eval'");
+              terms.push("'unsafe-inline'");
+            }
           }
           policies[j] = terms.join(' ');
         }

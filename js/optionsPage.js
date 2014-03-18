@@ -15,6 +15,9 @@ function save_options() {
   // White List Mode
   set_option('white_list_mode', $('#chkWhiteListMode').is(':checked'));
 
+  // Unsafe JS
+  set_option('allow_eval_inline', $('#chkAllowEvalInline').is(':checked'));
+
   displayMessage('Options saved.');
 }
 
@@ -45,6 +48,11 @@ function restore_options() {
   // White List Mode
   if (get_option('white_list_mode')) {
     $('#chkWhiteListMode').prop('checked', true);
+  }
+
+  // Unsafe JS
+  if (get_option('allow_eval_inline')) {
+    $('#chkAllowEvalInline').prop('checked', true);
   }
 }
 
