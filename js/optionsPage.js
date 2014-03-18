@@ -57,13 +57,15 @@ function restore_options() {
 }
 
 function add_site() {
-  var site = $('#txtAddSite').val();
+  var site = $('#txtAddSite').val().trim();
   $('#txtAddSite').val('');
 
-  $('#selSite').append($('<option>', {
-      value: site,
-      text : site
-  }));
+  if (site !== '') {
+    $('#selSite').append($('<option>', {
+        value: site,
+        text : site
+    }));
+  }
 }
 
 function remove_site() {
@@ -86,6 +88,12 @@ $(function() {
   $('#btnRemoveSite').click(remove_site);
   $('#btnClearSite').click(clear_sites);
   $('#save').click(save_options);
+
+  $("#txtAddSite").keyup(function(event){
+    if(event.keyCode == 13) {
+        $("#btnAddSite").click();
+    }
+  });
 
   restore_options();
 });
