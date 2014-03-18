@@ -33,6 +33,12 @@
     "persistent": true
   },
 
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+
   "web_accessible_resources" : ["js/retexChecker.js"],
 
   "options_page": "options.html"

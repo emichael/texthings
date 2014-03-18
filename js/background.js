@@ -18,6 +18,34 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   }
 });
 
+chrome.webRequest.onHeadersReceived.addListener(function(details) {
+    var hostname = get_hostname(details.url);
+    if (!should_texify(hostname)) {
+      return;
+    }
+
+    for (var i = 0; i < details.responseHeaders.length; i++) {
+      var header = details.responseHeaders[i];
+      if (header.name.toLowerCase() == 'content-security-policy') {
+        var policies = header.value.split(';');
+        for (var j = 0; j < policies.length; j++) {
+          var terms = policies[j].trim().split(' ');
+          if (terms[0].toLowerCase() == 'script-src') {
+            terms.push('https://c328740.ssl.cf1.rackcdn.com');
+          }
+          policies[j] = terms.join(' ');
+        }
+
+        header.value = policies.join('; ');
+        return {responseHeaders: details.responseHeaders};
+      }
+    }
+
+  },
+  {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
+  ["blocking", "responseHeaders"]
+);
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.method == 'shouldTeXify') {
     sendResponse({answer: should_texify(request.host),
@@ -43,6 +71,12 @@ function host_matches(host, domain_list) {
     }
   }
   return false;
+}
+
+function get_hostname(url) {
+  var parser = document.createElement('a');
+  parser.href = url;
+  return parser.hostname;
 }
 
 function get_delimiters() {
