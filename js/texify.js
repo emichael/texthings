@@ -1,6 +1,6 @@
 var mathjax = document.createElement('script');
 mathjax.type = 'text/javascript';
-mathjax.src = 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+mathjax.src = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
 
 var config = document.createElement('script');
 config.type = 'text/x-mathjax-config';

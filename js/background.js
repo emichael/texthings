@@ -1,3 +1,4 @@
+// Handle a click to the toolbar icon
 chrome.browserAction.onClicked.addListener(function(tab) {
   if (get_option('enabled')) {
     chrome.browserAction.setIcon({
@@ -18,6 +19,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   }
 });
 
+// Set the headers to allow the MathJax CDN if we're typesetting this page
 chrome.webRequest.onHeadersReceived.addListener(function(details) {
     var hostname = get_hostname(details.url);
     if (!should_texify(hostname)) {
@@ -31,11 +33,14 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
         for (var j = 0; j < policies.length; j++) {
           var terms = policies[j].trim().split(' ');
           if (terms[0].toLowerCase() == 'script-src') {
-            terms.push('https://c328740.ssl.cf1.rackcdn.com');
+            terms.push('https://cdn.mathjax.org');
             if (get_option('allow_eval_inline')) {
               terms.push("'unsafe-eval'");
               terms.push("'unsafe-inline'");
             }
+          }
+          else if (terms[0].toLowerCase() == 'font-src') {
+            terms.push('https://cdn.mathjax.org');
           }
           policies[j] = terms.join(' ');
         }
@@ -50,6 +55,7 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
   ["blocking", "responseHeaders"]
 );
 
+// Respond to texify.js
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.method == 'shouldTeXify') {
     sendResponse({answer: should_texify(request.host),
