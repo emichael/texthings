@@ -5,7 +5,7 @@
   "short_name": "TeX Things",
   "author": "emichael",
   "description": "An extension which lets you enable LaTeX on any website",
-  "version": "0.31",
+  "version": "0.4",
 
   "icons": {
     "128": "img/icon128.png",
