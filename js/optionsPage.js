@@ -5,6 +5,18 @@ function save_options() {
   set_option('display_dollar', $('#chkDisplayDollar').is(':checked'));
   set_option('display_bracket', $('#chkDisplayBracket').is(':checked'));
 
+  // Custom Delimiters
+  if ($('#chkInlineCustom').is(':checked')) {
+    set_option('inline_custom', [$('#customInlineOpen').val(), $('#customInlineClose').val()]);
+  } else {
+    set_option('inline_custom', false);
+  }
+  if ($('#chkDisplayCustom').is(':checked')) {
+    set_option('display_custom', [$('#customDisplayOpen').val(), $('#customDisplayClose').val()]);
+  } else {
+    set_option('display_custom', false);
+  }
+
   // Save the site list
   var sites = [];
   $('#selSite>option').each(function() {
@@ -31,6 +43,20 @@ function restore_options() {
   }
   if (get_option('display_bracket')) {
     $('#chkDisplayBracket').prop('checked', true);
+  }
+
+  // Custom Delimiters
+  var inline_custom = get_option('inline_custom');
+  if (inline_custom) {
+    $('#chkInlineCustom').prop('checked', true);
+    $('#customInlineOpen').val(inline_custom[0]);
+    $('#customInlineClose').val(inline_custom[1]);
+  }
+  var display_custom = get_option('display_custom');
+  if (display_custom) {
+    $('#chkDisplayCustom').prop('checked', true);
+    $('#customDisplayOpen').val(display_custom[0]);
+    $('#customDisplayClose').val(display_custom[1]);
   }
 
   // Load the site list
@@ -88,4 +114,12 @@ $(function() {
   });
 
   restore_options();
+});
+
+// Custom
+$(function() {
+  $('#customInlineOpen').watermark("\\(");
+  $('#customInlineClose').watermark("\\)");
+  $('#customDisplayOpen').watermark("\\{");
+  $('#customDisplayClose').watermark("\\}");
 });

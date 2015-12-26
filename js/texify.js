@@ -14,12 +14,18 @@ chrome.runtime.sendMessage({method: 'shouldTeXify', host: location.host},
       if (delimiters.inline_bracket) {
         inline_delimiters.push(['[;', ';]']);
       }
+      if (delimiters.inline_custom) {
+        inline_delimiters.push(delimiters.inline_custom);
+      }
       var display_delimiters = [];
       if (delimiters.display_dollar) {
         display_delimiters.push(['$$', '$$']);
       }
       if (delimiters.display_bracket) {
         display_delimiters.push(['\\[', '\\]']);
+      }
+      if (delimiters.display_custom) {
+        display_delimiters.push(delimiters.display_custom);
       }
 
       var pageScript = document.createElement('script');

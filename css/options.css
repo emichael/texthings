@@ -49,3 +49,8 @@ td {
   display: inline-block;
   margin: 0 15px;
 }
+
+.customDelim {
+  width: 2em;
+  margin-left: .5em;
+}

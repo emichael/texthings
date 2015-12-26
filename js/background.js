@@ -91,7 +91,9 @@ function get_delimiters() {
   var delimiters = {};
   delimiters.inline_dollar = get_option('inline_dollar');
   delimiters.inline_bracket = get_option('inline_bracket');
+  delimiters.inline_custom = get_option('inline_custom')
   delimiters.display_dollar = get_option('display_dollar');
   delimiters.display_bracket = get_option('display_bracket');
+  delimiters.display_custom = get_option('display_custom')
   return delimiters;
 }

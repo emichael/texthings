@@ -4,8 +4,10 @@ var default_options = {
   sites: [],
   inline_dollar: true,
   inline_bracket: true,
+  inline_custom: false,
   display_dollar: true,
-  display_bracket: true
+  display_bracket: true,
+  display_custom: false
 };
 
 function get_option(option_name) {
