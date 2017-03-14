@@ -1,6 +1,8 @@
 function config() {
   var scriptNode = document.getElementById('texAllTheThingsPageScript');
   MathJax.Hub.Config({
+    showProcessingMessages: false,
+    messageStyle: 'none',
     tex2jax: {
       inlineMath: JSON.parse(scriptNode.getAttribute('inlineMath')),
       displayMath: JSON.parse(scriptNode.getAttribute('displayMath'))
