@@ -4,7 +4,7 @@ chrome.runtime.sendMessage({method: 'shouldTeXify', host: location.host},
 
       var mathjax = document.createElement('script');
       mathjax.type = 'text/javascript';
-      mathjax.src = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured';
+      mathjax.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured';
 
       var delimiters = response.delimiters;
       var inline_delimiters = [];

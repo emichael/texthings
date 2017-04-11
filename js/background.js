@@ -37,10 +37,10 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
           var terms = policies[j].trim().split(' ');
           // Add the MathJax CDN to script-src and font-src
           if (terms[0].trim().toLowerCase() == 'script-src') {
-            terms.push('https://cdn.mathjax.org');
+            terms.push('https://cdnjs.cloudflare.com');
           }
           else if (terms[0].trim().toLowerCase() == 'font-src') {
-            terms.push('https://cdn.mathjax.org');
+            terms.push('https://cdnjs.cloudflare.com');
           }
           policies[j] = terms.join(' ');
         }
