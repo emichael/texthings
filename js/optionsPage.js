@@ -6,13 +6,30 @@ function save_options() {
   set_option('display_bracket', $('#chkDisplayBracket').is(':checked'));
 
   // Custom Delimiters
-  if ($('#chkInlineCustom').is(':checked')) {
-    set_option('inline_custom', [$('#customInlineOpen').val(), $('#customInlineClose').val()]);
+  var inline_open = $('#customInlineOpen').val().trim();
+  if (!inline_open) {
+    inline_open = "\\(";
+  }
+  var inline_close = $('#customInlineClose').val().trim();
+  if (!inline_close) {
+    inline_close = "\\)";
+  }
+  if ($('#chkInlineCustom').is(':checked') && inline_open && inline_close) {
+    set_option('inline_custom', [inline_open, inline_close]);
   } else {
     set_option('inline_custom', false);
   }
-  if ($('#chkDisplayCustom').is(':checked')) {
-    set_option('display_custom', [$('#customDisplayOpen').val(), $('#customDisplayClose').val()]);
+
+  var display_open = $('#customDisplayOpen').val().trim();
+  if (!display_open) {
+    display_open = "\\{";
+  }
+  var display_close = $('#customDisplayClose').val().trim();
+  if (!display_close) {
+    display_close = "\\}";
+  }
+  if ($('#chkDisplayCustom').is(':checked') && display_open && display_close) {
+    set_option('display_custom', [display_open, display_close]);
   } else {
     set_option('display_custom', false);
   }
