@@ -2,7 +2,7 @@ td {
   vertical-align: top;
 }
 
-#selSite, #txtAddSite {
+#selSite, #txtAddSite, #selTag, #txtAddTag {
   min-width: 250px;
 }
 

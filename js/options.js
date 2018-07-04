@@ -7,7 +7,8 @@ var default_options = {
   inline_custom: false,
   display_dollar: true,
   display_bracket: true,
-  display_custom: false
+  display_custom: false,
+  skip_tags: ['script','noscript','style','textarea','pre','code']
 };
 
 function get_option(option_name) {
@@ -34,4 +35,12 @@ function set_option(option_name, value) {
 
 function option_allowed(option_name) {
   return (option_name in default_options);
+}
+
+function get_default_option(option_name) {
+  if (option_allowed(option_name)) {
+    return default_options[option_name];
+  } else {
+    throw "Option " + option_name + " not supported";
+  }
 }
