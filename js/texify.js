@@ -34,6 +34,7 @@ chrome.runtime.sendMessage({method: 'shouldTeXify', host: location.host},
       pageScript.src = chrome.extension.getURL('js/pageScript.js');
       pageScript.setAttribute('inlineMath', JSON.stringify(inline_delimiters));
       pageScript.setAttribute('displayMath', JSON.stringify(display_delimiters));
+      pageScript.setAttribute('skipTags', JSON.stringify(response.skip_tags));
 
 
       document.body.appendChild(mathjax);

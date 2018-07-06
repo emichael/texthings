@@ -5,7 +5,8 @@ function config() {
     messageStyle: 'none',
     tex2jax: {
       inlineMath: JSON.parse(scriptNode.getAttribute('inlineMath')),
-      displayMath: JSON.parse(scriptNode.getAttribute('displayMath'))
+      displayMath: JSON.parse(scriptNode.getAttribute('displayMath')),
+      skipTags: JSON.parse(scriptNode.getAttribute('skipTags'))
     }
   });
 }

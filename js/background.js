@@ -57,7 +57,8 @@ chrome.webRequest.onHeadersReceived.addListener(function(details) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.method == 'shouldTeXify') {
     sendResponse({answer: should_texify(request.host),
-                  delimiters: get_delimiters()});
+                  delimiters: get_delimiters(),
+                  skip_tags: get_skip_tags()});
   } else {
     sendResponse({});
   }
@@ -96,4 +97,8 @@ function get_delimiters() {
   delimiters.display_bracket = get_option('display_bracket');
   delimiters.display_custom = get_option('display_custom')
   return delimiters;
+}
+
+function get_skip_tags(){
+  return get_option('skip_tags')
 }

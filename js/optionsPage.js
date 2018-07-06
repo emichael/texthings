@@ -34,6 +34,13 @@ function save_options() {
     set_option('display_custom', false);
   }
 
+  // tex2jax Skip Tags
+  var skip_tags = [];
+  $('#selTag>option').each(function() {
+    skip_tags.push($(this).val());
+  });
+  set_option('skip_tags', skip_tags);
+
   // Save the site list
   var sites = [];
   $('#selSite>option').each(function() {
@@ -76,6 +83,15 @@ function restore_options() {
     $('#customDisplayClose').val(display_custom[1]);
   }
 
+  // tex2jax Skip Tags
+  var skip_tags = get_option('skip_tags');
+  $.each(skip_tags, function(index, tag) {
+    $('#selTag').append($('<option>', {
+      value: tag,
+      text : tag
+    }));
+  });
+
   // Load the site list
   var sites = get_option('sites');
   $.each(sites, function(index, site) {
@@ -111,6 +127,37 @@ function clear_sites() {
   $('#selSite>option').remove();
 }
 
+function add_tag() {
+  var tag = $('#txtAddTag').val().trim();
+  $('#txtAddTag').val('');
+
+  if (tag !== '') {
+    $('#selTag').append($('<option>', {
+      value: tag,
+      text : tag,
+    }));
+  }
+}
+
+function remove_tag() {
+  $('#selTag>option:selected').remove();
+}
+
+function clear_tags() {
+  $('#selTag>option').remove();
+}
+
+function restore_default_tags() {
+  var default_tags = get_default_option('skip_tags');
+  clear_tags()
+  $.each(default_tags, function(index, tag) {
+    $('#selTag').append($('<option>', {
+      value: tag,
+      text : tag
+    }));
+  });
+}
+
 function displayMessage(message) {
   $('#status').text(message).addClass('visible');
   setTimeout(function() {
@@ -122,7 +169,19 @@ $(function() {
   $('#btnAddSite').click(add_site);
   $('#btnRemoveSite').click(remove_site);
   $('#btnClearSite').click(clear_sites);
+
+  $('#btnAddTag').click(add_tag);
+  $('#btnRemoveTag').click(remove_tag);
+  $('#btnClearTag').click(clear_tags);
+  $('#btnDefaultTags').click(restore_default_tags);
+
   $('#save').click(save_options);
+
+  $("#txtAddTag").keyup(function(event){
+    if(event.keyCode == 13) {
+        $("#btnAddTag").click();
+    }
+  });
 
   $("#txtAddSite").keyup(function(event){
     if(event.keyCode == 13) {
