@@ -51,6 +51,27 @@ function save_options() {
   // White List Mode
   set_option('white_list_mode', $('#chkWhiteListMode').is(':checked'));
 
+  // tex2jax Ignore Class
+  var ignore_class = $('#ignoreClass').val().trim();
+  if (!ignore_class) {
+    ignore_class = "tex2jax_ignore";
+  }
+  if ($('#chkIgnoreClass').is(':checked') && ignore_class) {
+    set_option('ignore_class', ignore_class);
+  } else {
+    set_option('ignore_class', false);
+  }
+  // tex2jax Process Class
+  var process_class = $('#processClass').val().trim();
+  if (!process_class) {
+    process_class = "tex2jax_process";
+  }
+  if ($('#chkProcessClass').is(':checked') && process_class) {
+    set_option('process_class', process_class);
+  } else {
+    set_option('process_class', false);
+  }
+
   displayMessage('Options saved.');
 }
 
@@ -100,6 +121,20 @@ function restore_options() {
         text : site
     }));
   });
+  
+  // tex2jax Ignore Class
+  var ignore_class = get_option('ignore_class');
+  if(ignore_class) {
+    $('#chkIgnoreClass').prop('checked', true);
+    $('#ignoreClass').val(ignore_class);
+  }
+
+  // tex2jax Process Class
+  var process_class = get_option('process_class');
+  if(process_class) {
+    $('#chkProcessClass').prop('checked', true);
+    $('#processClass').val(process_class);
+  }
 
   // White List Mode
   if (get_option('white_list_mode')) {
@@ -149,7 +184,7 @@ function clear_tags() {
 
 function restore_default_tags() {
   var default_tags = get_default_option('skip_tags');
-  clear_tags()
+  clear_tags();
   $.each(default_tags, function(index, tag) {
     $('#selTag').append($('<option>', {
       value: tag,

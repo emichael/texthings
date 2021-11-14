@@ -6,7 +6,9 @@ function config() {
     tex2jax: {
       inlineMath: JSON.parse(scriptNode.getAttribute('inlineMath')),
       displayMath: JSON.parse(scriptNode.getAttribute('displayMath')),
-      skipTags: JSON.parse(scriptNode.getAttribute('skipTags'))
+      skipTags: JSON.parse(scriptNode.getAttribute('skipTags')),
+      ignoreClass: JSON.parse(scriptNode.getAttribute('ignoreClass')),
+      processClass: JSON.parse(scriptNode.getAttribute('processClass'))
     }
   });
 }
