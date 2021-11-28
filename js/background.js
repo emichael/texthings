@@ -58,7 +58,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.method == 'shouldTeXify') {
     sendResponse({answer: should_texify(request.host),
                   delimiters: get_delimiters(),
-                  skip_tags: get_skip_tags()});
+                  skip_tags: get_skip_tags(),
+                  ignore_class: get_ignore_class(),
+                  process_class: get_process_class()});
   } else {
     sendResponse({});
   }
@@ -95,10 +97,18 @@ function get_delimiters() {
   delimiters.inline_custom = get_option('inline_custom')
   delimiters.display_dollar = get_option('display_dollar');
   delimiters.display_bracket = get_option('display_bracket');
-  delimiters.display_custom = get_option('display_custom')
+  delimiters.display_custom = get_option('display_custom');
   return delimiters;
 }
 
 function get_skip_tags(){
-  return get_option('skip_tags')
+  return get_option('skip_tags');
+}
+
+function get_ignore_class(){
+  return get_option('ignore_class');
+}
+
+function get_process_class(){
+  return get_option('process_class');
 }

@@ -72,6 +72,20 @@
     Otherwise, only domains in the list will <em>not</em> be typeset.
   </p>
 
+  <h2>Ignored Classes Regex</h2>
+  <p class="optionInfo">
+    Add a class name below to mark elements whose contents should not be processed. <br>
+    Note that this is a regular expression, and so you need to be sure to quote any regexp special characters. The pattern is inserted into one that requires your pattern to match a complete word, so setting the pattern to "class2" will cause it to match an element with class="class1 class2 class3" but not class="myclass2". Note that you can assign several classes by separating them by the vertical line character (|). For instance, with the pattern set to  "class1|class2" any element assigned a class of either class1 or class2 will be skipped.
+  </p>
+  <p><input type="checkbox" id="chkIgnoreClass">Ignore Class:<input type="text" id="ignoreClass" class="classBox"></p>
+
+  <h2>Processed Classes Regex</h2>
+  <p class="optionInfo">
+    Add a class name below to mark elements whose contents <i>should</i> be processed, even if they would have been ignored by "Ignored Classes Regex."<br>
+    Note that this is a regular expression, and so you need to be sure to quote any regexp special characters. The pattern is inserted into one that requires your pattern to match a complete word, so setting the pattern to "class2" will cause it to match an element with class="class1 class2 class3" but not class="myclass2". Note that you can assign several classes by separating them by the vertical line character (|). For instance, with the pattern set to  "class1|class2" any element assigned a class of either class1 or class2 will be processed.
+  </p>
+  <p><input type="checkbox" id="chkProcessClass">Process Class:<input type="text" id="processClass" class="classBox"></p>
+
   <button id="save">Save</button>
 
   <script src="js/jquery.min.js"></script>
